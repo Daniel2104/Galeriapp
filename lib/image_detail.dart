@@ -4,28 +4,38 @@ import 'image_model.dart';
 class ImageDetailScreen extends StatelessWidget {
   final UnsplashImage image;
 
-  ImageDetailScreen({required this.image});
+  const ImageDetailScreen({super.key, required this.image});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Detalle de la Imagen'),
+        title: const Text('Detalles'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Image.network(image.imageUrl),
-            Padding(
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.network(
+            image.imageUrl,
+            fit: BoxFit.cover,
+          ),
+          Positioned(
+            left: 16.0,
+            right: 16.0,
+            bottom: 16.0,
+            child: Container(
+              color: Colors.black.withOpacity(0.7),
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 image.description,
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
